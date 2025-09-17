@@ -1,7 +1,7 @@
 /* styles/globals.css */
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; */
   line-height: 1.6;
   background-color: #f7f7f7;
   color: #333;
@@ -38,4 +38,62 @@ li {
 
 article p {
   line-height: 1.8;
+}
+/* Homepage Hero Section */
+.hero {
+  text-align: center;
+  padding: 4rem 1rem;
+  background-color: #F7F8FA;
+  border-bottom: 1px solid #E5E7EB;
+}
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+.hero p {
+  font-size: 1.25rem;
+  color: #6B7280; /* A softer gray for subtitle */
+}
+
+/* Card Design */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+.card {
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+.card h3 {
+  margin-top: 0;
+}
+article {
+  max-width: 720px;
+  margin: 2rem auto; /* 自动居中 */
+}
+/* Blockquote Style */
+blockquote {
+  margin: 1.5em 0;
+  padding: 0.5em 1.5em;
+  border-left: 5px solid #0070f3; /* Using primary color */
+  background-color: #F7F8FA;
+  color: #374151;
+}
+
+/* Code block style */
+pre {
+  background-color: #111827; /* Dark background for code */
+  color: #E5E7EB;
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto; /* Handle long lines of code */
+  font-family: 'Fira Code', monospace; /* A good coding font */
 }
