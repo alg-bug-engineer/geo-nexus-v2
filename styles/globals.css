@@ -1,183 +1,135 @@
 /* styles/globals.css */
 :root {
-  --background-start-rgb: #0a0f1f; /* 深邃的藏青色 */
-  --background-end-rgb: #030613;   /* 近乎纯黑的背景 */
-  --text-primary: #e0e0e0;         /* 主要文字颜色，柔和的白色 */
-  --text-secondary: #a0a0a0;       /* 次要文字颜色，浅灰色 */
-  --accent-color-start: #00e5ff;   /* 强调色 - 青色 */
-  --accent-color-end: #b325e8;     /* 强调色 - 紫色 */
-  --card-background: rgba(16, 22, 42, 0.7); /* 半透明卡片背景 */
-  --card-border-color: rgba(60, 70, 110, 0.5); /* 卡片边框颜色 */
-  --card-hover-border-color: rgba(0, 229, 255, 0.7); /* 卡片悬停边框颜色 */
+  --background-rgb: #FFFFFF;    /* 背景 - 纯白 */
+  --foreground-rgb: #111827;    /* 主要文字 - 深灰 */
+  --secondary-text-rgb: #6B7280; /* 次要文字 - 中灰 */
+  --border-color: #E5E7EB;      /* 边框/分割线 - 浅灰 */
+  --accent-color: #0070f3;      /* 强调色 - 科技蓝 */
+  --card-background: #FFFFFF;   /* 卡片背景 */
 }
 
 body {
   margin: 0;
   line-height: 1.6;
-  background: linear-gradient(to bottom, var(--background-start-rgb), var(--background-end-rgb));
-  color: var(--text-primary);
+  background-color: var(--background-rgb);
+  color: var(--foreground-rgb);
   font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 main {
-  max-width: 800px;
+  max-width: 900px; /* 稍微加宽主内容区 */
   margin: 0 auto;
   padding: 1rem;
-  background-color: transparent; /* 移除白色背景 */
   min-height: 100vh;
 }
 
 a {
-  color: var(--accent-color-start);
+  color: var(--accent-color);
   text-decoration: none;
-  transition: color 0.2s ease-in-out;
+  transition: opacity 0.2s ease-in-out;
 }
 
 a:hover {
   text-decoration: none;
-  color: #fff;
+  opacity: 0.8;
 }
 
-h1, h2, h3 {
-  color: #ffffff;
-  text-shadow: 0 0 8px rgba(0, 229, 255, 0.3); /* 标题增加辉光效果 */
+h1, h2, h3, h4 {
+  color: var(--foreground-rgb);
+  letter-spacing: -0.02em; /* 字符间距微调 */
 }
 
 h2 {
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--card-border-color);
-    margin-bottom: 2rem;
-}
-
-ul {
-  padding-left: 20px;
-}
-
-li {
-  margin-bottom: 10px;
-}
-
-article p {
-  line-height: 1.8;
-  color: var(--text-secondary);
+    font-size: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border-color); /* 线条感 */
+    margin: 3rem 0 2rem 0;
 }
 
 /* Homepage Hero Section */
 .hero {
   text-align: center;
-  padding: 5rem 1rem 4rem;
-  background: transparent;
-  border: none;
-  border-radius: 16px;
+  padding: 4rem 1rem;
+  border-bottom: 1px solid var(--border-color);
   margin-bottom: 3rem;
-  position: relative;
-  overflow: hidden;
-  background: radial-gradient(ellipse at top, rgba(17, 24, 39, 0.8), transparent 70%);
 }
-
-.hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 16px;
-    border: 1px solid transparent;
-    background: linear-gradient(120deg, var(--accent-color-start), var(--accent-color-end)) border-box;
-    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: destination-out;
-    mask-composite: exclude;
-    opacity: 0.3;
-}
-
 
 .hero h1 {
   font-size: 3.5rem;
-  margin-bottom: 0.5rem;
-  background: -webkit-linear-gradient(45deg, var(--accent-color-start), #fff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  letter-spacing: -0.05em;
+  background: none;
+  -webkit-text-fill-color: initial;
 }
 .hero p {
   font-size: 1.25rem;
-  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+  color: var(--secondary-text-rgb);
 }
 
-/* Card Design */
+/* Card Design REFINED */
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.5rem;
-  margin-top: 2rem;
 }
 
 .card {
   background: var(--card-background);
-  border: 1px solid var(--card-border-color);
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   padding: 1.5rem;
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
-  backdrop-filter: blur(10px); /* 毛玻璃效果 */
-  position: relative;
-  overflow: hidden;
-}
-
-.card::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at 50% 0, rgba(0, 229, 255, 0.2), transparent 40%);
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  display: block; /* for link behavior */
 }
 
 .card:hover {
-  transform: translateY(-5px);
-  border-color: var(--card-hover-border-color);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2), 0 0 20px var(--card-hover-border-color);
-}
-.card:hover::before {
-    opacity: 1;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
 .card h3 {
   margin-top: 0;
-  color: #fff;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+  color: var(--foreground-rgb);
 }
 .card p {
-    color: var(--text-secondary);
+    color: var(--secondary-text-rgb);
+    font-size: 0.95rem;
 }
 
+/* Article Page Style */
 article {
   max-width: 720px;
   margin: 2rem auto;
+}
+article h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
 }
 
 /* Blockquote Style */
 blockquote {
   margin: 1.5em 0;
   padding: 0.5em 1.5em;
-  border-left: 3px solid;
-  border-image-slice: 1;
-  border-image-source: linear-gradient(to bottom, var(--accent-color-start), var(--accent-color-end));
-  background-color: rgba(16, 22, 42, 0.5);
-  color: var(--text-primary);
+  border-left: 3px solid var(--accent-color);
+  background-color: #F9FAFB; /* 浅灰背景 */
+  color: var(--secondary-text-rgb);
 }
 
 /* Code block style */
 pre {
-  background-color: #030613;
-  color: #E5E7EB;
+  background-color: #F3F4F6;
+  color: var(--foreground-rgb);
   padding: 1rem;
   border-radius: 8px;
   overflow-x: auto;
   font-family: 'Fira Code', 'Jetbrains Mono', monospace;
-  border: 1px solid var(--card-border-color);
+  border: 1px solid var(--border-color);
 }
