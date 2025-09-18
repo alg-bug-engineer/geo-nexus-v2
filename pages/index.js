@@ -1,6 +1,7 @@
 // pages/index.js
 
 import Link from 'next/link';
+import Image from 'next/image'; // 导入Image组件
 import { getAllPedia } from '../lib/pediaData';
 import { getAllPosts } from '../lib/blogData';
 
@@ -15,7 +16,10 @@ export default function HomePage({ allPedia, allPosts }) {
 
       {/* 最新实战日志 (卡片式布局) */}
       <section>
-        <h2>最新实战</h2>
+        <h2>
+          <Image src="/file.svg" alt="实战日志" width={24} height={24} />
+          最新实战
+        </h2>
         <div className="card-grid">
           {allPosts.map((post) => (
             <Link href={`/blog/${post.slug}`} key={post.slug} legacyBehavior>
@@ -30,14 +34,17 @@ export default function HomePage({ allPedia, allPosts }) {
 
       {/* 核心百科 (简洁列表布局) */}
       <section style={{ marginTop: '3rem' }}>
-        <h2>核心百科</h2>
+        <h2>
+          <Image src="/globe.svg" alt="核心百科" width={24} height={24} />
+          核心百科
+        </h2>
         <ul style={{ listStyle: 'none', padding: 0 }}>
           {allPedia.map((entry) => (
-            <li key={entry.slug} style={{ marginBottom: '1rem' }}>
+            <li key={entry.slug} style={{ marginBottom: '1rem', borderBottom: '1px solid var(--card-border-color)', paddingBottom: '1rem' }}>
               <Link href={`/pedia/${entry.slug}`}>
                 <strong style={{ fontSize: '1.2rem' }}>{entry.title}</strong>
               </Link>
-              <p style={{ margin: '0.25rem 0 0 0', color: '#6B7280' }}>
+              <p style={{ margin: '0.25rem 0 0 0', color: '#a0a0a0' }}>
                 {entry.definition}
               </p>
             </li>

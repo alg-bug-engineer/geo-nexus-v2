@@ -1,31 +1,55 @@
 /* styles/globals.css */
+:root {
+  --background-start-rgb: #0a0f1f; /* 深邃的藏青色 */
+  --background-end-rgb: #030613;   /* 近乎纯黑的背景 */
+  --text-primary: #e0e0e0;         /* 主要文字颜色，柔和的白色 */
+  --text-secondary: #a0a0a0;       /* 次要文字颜色，浅灰色 */
+  --accent-color-start: #00e5ff;   /* 强调色 - 青色 */
+  --accent-color-end: #b325e8;     /* 强调色 - 紫色 */
+  --card-background: rgba(16, 22, 42, 0.7); /* 半透明卡片背景 */
+  --card-border-color: rgba(60, 70, 110, 0.5); /* 卡片边框颜色 */
+  --card-hover-border-color: rgba(0, 229, 255, 0.7); /* 卡片悬停边框颜色 */
+}
+
 body {
   margin: 0;
-  /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; */
   line-height: 1.6;
-  background-color: #f7f7f7;
-  color: #333;
+  background: linear-gradient(to bottom, var(--background-start-rgb), var(--background-end-rgb));
+  color: var(--text-primary);
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 main {
   max-width: 800px;
   margin: 0 auto;
   padding: 1rem;
-  background-color: #fff;
+  background-color: transparent; /* 移除白色背景 */
   min-height: 100vh;
 }
 
 a {
-  color: #0070f3;
+  color: var(--accent-color-start);
   text-decoration: none;
+  transition: color 0.2s ease-in-out;
 }
 
 a:hover {
-  text-decoration: underline;
+  text-decoration: none;
+  color: #fff;
 }
 
 h1, h2, h3 {
-  color: #111;
+  color: #ffffff;
+  text-shadow: 0 0 8px rgba(0, 229, 255, 0.3); /* 标题增加辉光效果 */
+}
+
+h2 {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--card-border-color);
+    margin-bottom: 2rem;
 }
 
 ul {
@@ -38,21 +62,49 @@ li {
 
 article p {
   line-height: 1.8;
+  color: var(--text-secondary);
 }
+
 /* Homepage Hero Section */
 .hero {
   text-align: center;
-  padding: 4rem 1rem;
-  background-color: #F7F8FA;
-  border-bottom: 1px solid #E5E7EB;
+  padding: 5rem 1rem 4rem;
+  background: transparent;
+  border: none;
+  border-radius: 16px;
+  margin-bottom: 3rem;
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(ellipse at top, rgba(17, 24, 39, 0.8), transparent 70%);
 }
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 16px;
+    border: 1px solid transparent;
+    background: linear-gradient(120deg, var(--accent-color-start), var(--accent-color-end)) border-box;
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
+    opacity: 0.3;
+}
+
+
 .hero h1 {
-  font-size: 3rem;
+  font-size: 3.5rem;
   margin-bottom: 0.5rem;
+  background: -webkit-linear-gradient(45deg, var(--accent-color-start), #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 .hero p {
   font-size: 1.25rem;
-  color: #6B7280; /* A softer gray for subtitle */
+  color: var(--text-secondary);
 }
 
 /* Card Design */
@@ -62,38 +114,70 @@ article p {
   gap: 1.5rem;
   margin-top: 2rem;
 }
+
 .card {
-  border: 1px solid #E5E7EB;
+  background: var(--card-background);
+  border: 1px solid var(--card-border-color);
   border-radius: 8px;
   padding: 1.5rem;
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  backdrop-filter: blur(10px); /* 毛玻璃效果 */
+  position: relative;
+  overflow: hidden;
 }
+
+.card::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 0, rgba(0, 229, 255, 0.2), transparent 40%);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  border-color: var(--card-hover-border-color);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2), 0 0 20px var(--card-hover-border-color);
 }
+.card:hover::before {
+    opacity: 1;
+}
+
 .card h3 {
   margin-top: 0;
+  color: #fff;
 }
+.card p {
+    color: var(--text-secondary);
+}
+
 article {
   max-width: 720px;
-  margin: 2rem auto; /* 自动居中 */
+  margin: 2rem auto;
 }
+
 /* Blockquote Style */
 blockquote {
   margin: 1.5em 0;
   padding: 0.5em 1.5em;
-  border-left: 5px solid #0070f3; /* Using primary color */
-  background-color: #F7F8FA;
-  color: #374151;
+  border-left: 3px solid;
+  border-image-slice: 1;
+  border-image-source: linear-gradient(to bottom, var(--accent-color-start), var(--accent-color-end));
+  background-color: rgba(16, 22, 42, 0.5);
+  color: var(--text-primary);
 }
 
 /* Code block style */
 pre {
-  background-color: #111827; /* Dark background for code */
+  background-color: #030613;
   color: #E5E7EB;
   padding: 1rem;
   border-radius: 8px;
-  overflow-x: auto; /* Handle long lines of code */
-  font-family: 'Fira Code', monospace; /* A good coding font */
+  overflow-x: auto;
+  font-family: 'Fira Code', 'Jetbrains Mono', monospace;
+  border: 1px solid var(--card-border-color);
 }
