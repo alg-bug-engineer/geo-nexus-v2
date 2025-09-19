@@ -73,8 +73,13 @@ export default function Layout({ children }) {
         {children}
       </main>
 
+      {/* <footer style={footerStyles}>
+        <p>© {new Date().getFullYear()} GEO-Nexus. All Rights Reserved.</p>
+      </footer> */}
       <footer style={footerStyles}>
         <p>© {new Date().getFullYear()} GEO-Nexus. All Rights Reserved.</p>
+        {/* Add this line */}
+        <Link href="/privacy-policy">Privacy Policy</Link>
       </footer>
     </div>
   );
