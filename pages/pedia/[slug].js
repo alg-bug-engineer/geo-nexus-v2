@@ -1,26 +1,63 @@
 // pages/pedia/[slug].js
 import { getAllPedia, getPediaBySlug, getPediaByCategory } from '../../lib/pediaData';
-import { autoLinkContent } from '../../lib/linking'; // 1. 导入自动链接函数
+import { autoLinkContent } from '../../lib/linking';
 import PediaLayout from '../../components/PediaLayout';
 import KnowledgeGraph from '../../components/KnowledgeGraph';
+import Head from 'next/head'; // 导入Head组件用于SEO
+
+// 新增一个组件用于渲染FAQ，这对于SEO非常好
+const FaqSection = ({ faq }) => (
+  <section>
+    <h3>常见问题 (FAQ)</h3>
+    {faq.map((item, index) => (
+      <div key={index}>
+        <h4>{item.question}</h4>
+        <p>{item.answer}</p>
+      </div>
+    ))}
+  </section>
+);
 
 export default function PediaPage({ entry, relatedEntries, categories }) {
   if (!entry) return <div>词条未找到</div>;
 
   return (
     <PediaLayout categories={categories}>
+      {/* 动态设置页面标题和描述，对SEO至关重要 */}
+      <Head>
+        <title>{entry.title} - GEO百科</title>
+        <meta name="description" content={entry.definition} />
+      </Head>
       <article>
         <h1>{entry.title}</h1>
         
-        {/* 2. 使用 dangerouslySetInnerHTML 渲染处理后的定义 */}
         <p>
           <strong>定义:</strong> <span dangerouslySetInnerHTML={{ __html: entry.processedDefinition }} />
         </p>
-        
-        {/* 这里是正文内容 */}
-        <p>这是关于"{entry.title}"的详细解释内容。随着您添加更多信息，这里会变得更丰富。</p>
 
-        {/* 嵌入微型知识图谱 */}
+        {/* --- 开始渲染新增的详细内容 --- */}
+        {entry.content && (
+          <>
+            <p>{entry.content.introduction}</p>
+            {entry.content.sections.map((section, index) => (
+              <section key={index}>
+                <h3>{section.title}</h3>
+                <ul>
+                  {section.points.map((point, i) => (
+                    <li key={i} dangerouslySetInnerHTML={{ __html: point }} />
+                  ))}
+                </ul>
+              </section>
+            ))}
+            
+            {/* 渲染FAQ区域 */}
+            {entry.content.faq && entry.content.faq.length > 0 && (
+              <FaqSection faq={entry.content.faq} />
+            )}
+          </>
+        )}
+        {/* --- 详细内容渲染结束 --- */}
+
         {relatedEntries.length > 0 && (
           <>
             <h3>知识连接图谱</h3>
@@ -40,9 +77,8 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const entry = getPediaBySlug(params.slug);
-  const allPedia = getAllPedia(); // 3. 获取所有百科词条用于链接匹配
+  const allPedia = getAllPedia(); 
   
-  // 4. 对当前词条的定义进行处理
   const processedDefinition = autoLinkContent(entry.definition, allPedia);
 
   const relatedEntries = entry.relatedTerms?.map(slug => getPediaBySlug(slug)).filter(Boolean) || [];
@@ -52,11 +88,11 @@ export async function getStaticProps({ params }) {
     props: { 
       entry: {
         ...entry,
-        processedDefinition, // 5. 将处理后的定义传递给页面
+        processedDefinition,
       }, 
       relatedEntries,
       categories 
     }, 
-    revalidate: 60 
+    revalidate: 60 * 60, // 1小时重新生成一次页面
   };
 }
