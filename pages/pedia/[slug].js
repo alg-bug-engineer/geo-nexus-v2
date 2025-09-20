@@ -61,7 +61,7 @@ export default function PediaPage({ entry, relatedEntries, categories }) {
         {relatedEntries.length > 0 && (
           <>
             <h3>知识连接图谱</h3>
-            <p>下图展示了"{entry.title}"与其他核心概念的直接关联，点击节点即可跳转。</p>
+            <p>下图展示了&quot;{entry.title}&quot;与其他核心概念的直接关联，点击节点即可跳转。</p>
             <KnowledgeGraph centerNode={entry} relatedNodes={relatedEntries} />
           </>
         )}
