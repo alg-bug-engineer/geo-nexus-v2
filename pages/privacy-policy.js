@@ -8,15 +8,14 @@ export default function PrivacyPolicyPage() {
     <>
       <Head>
         <title>Privacy Policy - GEO-Nexus</title>
-        <meta name="description" content="Privacy policy for ai-knowledgepoints.cn, detailing how we collect, use, and protect your data." />
+        <meta name="description" content="Privacy policy for geo-nexus.cn, detailing how we collect, use, and protect your data." />
       </Head>
 
       <article>
         <h1>Privacy Policy</h1>
         <p><strong>Effective Date:</strong> September 19, 2025</p>
-{/* <Link href="https://ai-knowledgepoints.cn/">GEO Nexus</Link> */}
         <p>
-          Welcome to GEO Nexus (hereinafter referred to as "the Website"). This Website is created and maintained by Yun Yi (芝士AI吃鱼) and is dedicated to sharing knowledge about Generative Engine Optimization (GEO) and Search Engine Optimization (SEO). We understand the importance of your privacy and are committed to protecting your personal information.
+          Welcome to <Link href="https://www.geo-nexus.cn/">GEO Nexus</Link> (hereinafter referred to as "the Website"). This Website is created and maintained by Yun Yi (芝士AI吃鱼) and is dedicated to sharing knowledge about Generative Engine Optimization (GEO) and Search Engine Optimization (SEO). We understand the importance of your privacy and are committed to protecting your personal information.
         </p>
 
         <p>

@@ -30,6 +30,15 @@ const linkStyles = {
     transition: 'color 0.2s',
 };
 
+// --- 样式优化：为页脚链接创建一个独立的样式对象 ---
+const footerLinkStyles = {
+    color: '#9CA3AF', // 使用页脚次要文字颜色
+    textDecoration: 'none',
+    fontSize: '0.9rem',
+    transition: 'color 0.2s',
+};
+
+
 const footerStyles = {
     textAlign: 'center',
     padding: '2rem 1rem',
@@ -73,13 +82,36 @@ export default function Layout({ children }) {
         {children}
       </main>
 
-      {/* <footer style={footerStyles}>
-        <p>© {new Date().getFullYear()} GEO-Nexus. All Rights Reserved.</p>
-      </footer> */}
+      {/* --- 这是修改后的页脚部分 --- */}
       <footer style={footerStyles}>
         <p>© {new Date().getFullYear()} GEO-Nexus. All Rights Reserved.</p>
-        {/* Add this line */}
-        <Link href="/privacy-policy">Privacy Policy</Link>
+        <div style={{ marginTop: '0.5rem', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '1.5rem' }}>
+          <Link 
+            href="/about" 
+            style={footerLinkStyles}
+            onMouseEnter={(e) => e.target.style.color = '#374151'}
+            onMouseLeave={(e) => e.target.style.color = '#9CA3AF'}
+          >
+            关于我
+          </Link>
+          {/* 使用 a 标签来创建 mailto 链接 */}
+          <a 
+            href="mailto:646184101@qq.com" 
+            style={footerLinkStyles}
+            onMouseEnter={(e) => e.target.style.color = '#374151'}
+            onMouseLeave={(e) => e.target.style.color = '#9CA3AF'}
+          >
+            联系方式
+          </a>
+          <Link 
+            href="/privacy-policy" 
+            style={footerLinkStyles}
+            onMouseEnter={(e) => e.target.style.color = '#374151'}
+            onMouseLeave={(e) => e.target.style.color = '#9CA3AF'}
+          >
+            隐私政策
+          </Link>
+        </div>
       </footer>
     </div>
   );
